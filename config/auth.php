@@ -69,10 +69,10 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        'admins' => [
-            'driver' => 'database',
-            'table' => App\Models\Mentor::class,
-        ],
+        // 'admins' => [
+        //     'driver' => 'database',
+        //     'table' => App\Models\Mentor::class,
+        // ],
     ],
 
     /*
@@ -101,12 +101,12 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
-        'admins' => [
-            'provider' => 'admins',
-            'table' => 'password_reset_tokens',
-            'expire' => 60,
-            'throttle' => 60,
-        ],
+        // 'admins' => [
+        //     'provider' => 'admins',
+        //     'table' => 'password_reset_tokens',
+        //     'expire' => 60,
+        //     'throttle' => 60,
+        // ],
     ],
 
     /*
