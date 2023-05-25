@@ -6,6 +6,7 @@ use App\Models\Mentor;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMentorRequest;
 use App\Http\Requests\UpdateMentorRequest;
+use Illuminate\Support\Facades\Auth;
 
 class MentorController extends Controller
 {
@@ -14,7 +15,7 @@ class MentorController extends Controller
      */
     public function index()
     {
-        //
+        return view('mentor.index');
     }
 
     /**

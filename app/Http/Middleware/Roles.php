@@ -16,13 +16,11 @@ class Roles
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check()) {
-            if (Auth::user()->role == 1) {
-                redirect('mentor');
-            } elseif (Auth::user()->role == 2) {
-                # code...
-            }
+        if (Auth::check() && Auth::user()->role == '1') {
+            return $next($request); 
+        } 
+        else {
+           return redirect()->back();
         }
-        return $next($request);
     }
 }
