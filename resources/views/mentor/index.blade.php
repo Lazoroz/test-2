@@ -1,3 +1,9 @@
 <x-app-layout>
-    <h1>pee pee poo poo </h1>
+
+    @foreach ($mentor as $m)
+    <div class="w-full sm:max-w-md mt-6 px-6 py-4 flex flex-col items-center bg-white shadow-md overflow-hidden sm:rounded-lg">
+        {{ $m->voornaam }}
+    </div>
+    @endforeach
+    
 </x-app-layout>

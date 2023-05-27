@@ -10,12 +10,19 @@ use Illuminate\Support\Facades\Auth;
 
 class MentorController extends Controller
 {
+    // public function __construct() {
+    //     // (Auth::user()) ? a : b ;
+    //     print_r(Auth::user()->role);
+    // }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('mentor.index');
+        $email = Auth::user()->email;
+        $mentor = Mentor::where('email', $email)->get();
+       
+        return view('mentor.index', ['mentor' => $mentor]);
     }
 
     /**
