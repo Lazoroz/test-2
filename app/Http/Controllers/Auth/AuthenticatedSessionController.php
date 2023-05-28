@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use PhpParser\Node\Stmt\ElseIf_;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -25,16 +26,27 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        // $request->authenticate();
 
-        $request->session()->regenerate();
+       $cred = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+ 
+        if (Auth::attempt($cred)) {
 
-        if (Auth::user()->role == '0') {
-            return redirect('mentor');
-        } else {
-            return redirect()->intended(RouteServiceProvider::HOME);
-        } 
+            $request->session()->regenerate();
 
+            if (Auth::user()->role == '0') {
+                return redirect()->intended(RouteServiceProvider::MENTOR);
+            } elseif (Auth::user()->role == '1') {
+                return redirect()->intended(RouteServiceProvider::HOME);
+            }      
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');   
     }
 
     /**
