@@ -19,8 +19,7 @@ class MentorController extends Controller
      */
     public function index()
     {
-        $email = Auth::user()->email;
-        $mentor = Mentor::where('email', $email)->get();
+        $mentor = Mentor::with('user')->latest()->get();
        
         return view('mentor.index', ['mentor' => $mentor]);
     }
@@ -38,7 +37,8 @@ class MentorController extends Controller
      */
     public function store(StoreMentorRequest $request)
     {
-        //
+        $v = '';
+        $request->user()->mentor()->create($v);
     }
 
     /**

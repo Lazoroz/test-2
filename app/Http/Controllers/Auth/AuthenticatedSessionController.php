@@ -24,7 +24,7 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
         // $request->authenticate();
 
@@ -38,14 +38,15 @@ class AuthenticatedSessionController extends Controller
             $request->session()->regenerate();
 
             if (Auth::user()->role == '0') {
-                return redirect()->intended(RouteServiceProvider::MENTOR);
+                // return redirect()->intended(RouteServiceProvider::MENTOR);
+                return redirect('mentor');
             } elseif (Auth::user()->role == '1') {
                 return redirect()->intended(RouteServiceProvider::HOME);
             }      
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'De inloggegevens komen niet overeen met onze gegevens.',
         ])->onlyInput('email');   
     }
 

@@ -9,13 +9,19 @@
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
-
+                @if (Auth::user()->role == '1')
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-7 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('Mentor')">
+                        {{ __('Add') }}
+                    </x-nav-link>
                 </div>
+                    
+                @endif
             </div>
 
             <!-- Settings Dropdown -->

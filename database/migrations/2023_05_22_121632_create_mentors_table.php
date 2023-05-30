@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('mentors', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('voornaam');
             $table->string('achternaam');
             $table->string('klas');
